@@ -3,7 +3,7 @@
     <div class="left">
       <el-form :model="formData" label-width="100px">
         <el-form-item label="本金">
-          <el-input v-model="formData.total"></el-input>
+          <el-input v-model="formData.total" type="number"></el-input>
         </el-form-item>
         <el-form-item label="利息起算日期">
           <el-date-picker
@@ -24,7 +24,7 @@
           ></el-date-picker>
         </el-form-item>
         <el-form-item label="lpr倍率">
-          <el-input v-model="formData.rate"></el-input>
+          <el-input v-model="formData.rate" type="number"></el-input>
         </el-form-item>
         <el-form-item label="lpr">
           <el-select v-model="formData.lprY" placeholder="请选择活动区域">
@@ -47,10 +47,10 @@
         style="width: 100%"
       >
         <el-table-column prop="total" label="本金"> </el-table-column>
-        <el-table-column prop="start" label="利息起算日期"> </el-table-column>
-        <el-table-column prop="end" label="利息截止日期"> </el-table-column>
+        <el-table-column prop="start" label="利息起算日期" min-width="120"> </el-table-column>
+        <el-table-column prop="end" label="利息截止日期" min-width="120"> </el-table-column>
         <el-table-column prop="days" label="计算天数"> </el-table-column>
-        <el-table-column prop="lpr" label="LPR（%）"> </el-table-column>
+        <el-table-column prop="lpr" label="LPR（%）" min-width="100"> </el-table-column>
         <el-table-column prop="interest" label="利息" :formatter="intFt">
         </el-table-column>
       </el-table>
@@ -283,6 +283,7 @@ body {
   text-align: center;
   color: #2c3e50;
   display: flex;
+  flex-direction: column;
 }
 
 .left,
@@ -291,18 +292,67 @@ body {
   background: #ffffff;
   border-radius: 10px;
   padding: 10px;
-  height: calc(100vh - 20px);
+  margin-bottom: 20px;
   overflow: auto;
 }
 
 .left {
-  box-sizing: border-box;
-  width: 600px;
-  margin-right: 20px;
+  width: 100%;
 }
 
 .right {
-  flex-grow: 1;
+  width: 100%;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1);
+}
+
+/* 媒体查询 - PC端 */
+@media (min-width: 992px) {
+  #app {
+    flex-direction: row;
+  }
+  
+  .left {
+    width: 600px;
+    margin-right: 20px;
+    height: calc(100vh - 20px);
+  }
+  
+  .right {
+    flex-grow: 1;
+    height: calc(100vh - 20px);
+  }
+}
+
+/* 媒体查询 - 平板 */
+@media (min-width: 768px) and (max-width: 991px) {
+  .el-form-item {
+    margin-bottom: 15px;
+  }
+  
+  .el-table {
+    font-size: 14px;
+  }
+}
+
+/* 媒体查询 - 手机端 */
+@media (max-width: 767px) {
+  .el-form-item {
+    margin-bottom: 10px;
+  }
+  
+  .el-table {
+    font-size: 12px;
+    overflow-x: auto;
+    display: block;
+  }
+  
+  .el-table__body-wrapper {
+    overflow-x: auto;
+  }
+  
+  .el-button {
+    padding: 8px 12px;
+    font-size: 12px;
+  }
 }
 </style>

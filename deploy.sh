@@ -12,6 +12,6 @@ git add -A
 git commit -m 'deploy'
 
 # 推送到gh-pages分支
-git push -f git@github.com:你的用户名/你的仓库名.git master:gh-pages
+git push -f https://github.com/kokutuo/damages.git master:gh-pages
 
 cd -
